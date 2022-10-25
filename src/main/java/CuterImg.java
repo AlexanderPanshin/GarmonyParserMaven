@@ -12,7 +12,7 @@ public class CuterImg {
     }
     public void cutImage(){
         try {
-            if(!fm.getFileImg().isEmpty()) {
+            if(!fm.getFileImg().isEmpty()&&!fm.isNoImage()) {
                 BufferedImage image = ImageIO.read(new File(fm.getFileImg().get(0)));
                 int x = image.getWidth() / 2 - 100;
                 int y = image.getHeight() / 2 - 100;

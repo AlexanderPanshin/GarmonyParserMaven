@@ -22,7 +22,7 @@ public class Parser {
             ftpPath = sc.nextLine();
             ftpOn = true;
         }
-        System.out.println("Саша ввиди адреса данные Натальей Анатольевной:");
+        System.out.println("Введите адрес записи в вк :");
 
         String newUrl = urlCorector(sc.nextLine());
         while (newUrl!="exit") {

@@ -10,6 +10,12 @@ public class FileManager {
     FTPLoader ftp;
     boolean ftpon = false;
 
+    public boolean isNoImage() {
+        return noImage;
+    }
+
+    boolean noImage = false;
+
     public FTPLoader getFtp() {
         return ftp;
     }
@@ -50,6 +56,10 @@ public class FileManager {
         recText(new File(newDirectory.getAbsolutePath()+"\\"+pt.fileName+".txt"));
         for(String s : pi.getUrlImage()){
             recImage(newDirectory.getAbsoluteFile(),s);
+        }
+        if(pi.getUrlImage().isEmpty()){
+            recImage(newDirectory.getAbsoluteFile(),"https://mygemorr.ru/noImage200.png");
+            noImage = true;
         }
     }
     public void recText(File file){
@@ -96,4 +106,5 @@ public class FileManager {
             System.out.println("Exception: " + e.getMessage());
         }
     }
+
 }
