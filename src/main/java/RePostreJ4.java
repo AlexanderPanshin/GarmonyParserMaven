@@ -31,7 +31,7 @@ public class RePostreJ4 {
         this.title = pt.namePost;
         this.articletext = pt.getTextContent();
 
-        this.alias = FTPLoader.Translator.translitor(title);
+        this.alias = FTPLoader.Translator.translitor(pt.fileName);
 
     }
     public void goPost(String siteName){//Это отправляет пост запрос
