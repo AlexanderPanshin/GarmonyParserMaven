@@ -14,7 +14,6 @@ public class RePostreJ4 {
     private Integer catid;
     private  String metadesc;
     private String metakey;
-    private FTPLoader ftp;
     private ParserText pt;
 
 
