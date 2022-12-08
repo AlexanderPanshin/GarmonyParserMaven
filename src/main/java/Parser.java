@@ -40,7 +40,7 @@ public class Parser {
         }
 
         System.out.println("Введите адрес записи в вк :");
-        // тут он ждет урл формата https://vk.com/test?w=wall-11111111_1111/all
+        // Тепреь можно любой урл
         String newUrl = urlCorector(sc.nextLine());
         while (newUrl!="exit") {
             pt1 = new ParserText(newUrl);
@@ -68,8 +68,13 @@ public class Parser {
 
     }
     public static String urlCorector(String url){
-        url = "https://vk.com/"+url.split("w=")[1];
-
-        return url.split("/a")[0];
+        if(url.contains("w=")) {
+            url = "https://vk.com/" + url.split("w=")[1];
+        }
+        if(url.contains("/all")) {
+            return url.split("/a")[0];
+        }else {
+            return url;
+        }
     }
 }
