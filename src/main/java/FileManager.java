@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class FileManager {
@@ -79,7 +78,13 @@ public class FileManager {
         try{
             String fileName = file.getAbsolutePath()+"\\"+pt.getFileName()+"img"+conterImg+".jpg";
             conterImg++;
-            String website = url;
+            String website;
+            if(!url.contains("https")) {
+                StringBuilder sb = new StringBuilder(url);
+                sb.insert(4, "s");
+                website = sb.toString();
+            }else website = url;
+
             fileImg.add(fileName);
 
             System.out.println("Downloading File From: " + website);
