@@ -26,7 +26,7 @@ public class ParserImage {
             throw new RuntimeException(e);
         }
         Elements title = document.select("img.MediaGrid__imageElement");
-        
+
         for(Element e:title){
             String urlParse = e.toString();
             urlParse = urlParse.split("src=\"")[1];
