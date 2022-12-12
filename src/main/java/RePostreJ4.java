@@ -57,7 +57,7 @@ public class RePostreJ4 {
     }
     private String jsonCreater(){ //Этот метод создает строку JSON
         StringBuilder sb = new StringBuilder("{\"alias\":\"");
-        sb.append(alias+"\",\"articletext\":\""+clear(articletext)+"\",\"catid\":"+catid+","+LANGUAGE+",\"metadesc\":\""+metadesc
+        sb.append(alias+"\",\"articletext\":\""+clear(articletext)+pt.getHtmlImg().toString()+"\",\"catid\":"+catid+","+LANGUAGE+",\"metadesc\":\""+metadesc
                 +"\",\"metakey\":\""+metakey+"\",\"title\": \""+title+"\"}");
         System.out.println(sb);
         return sb.toString();
