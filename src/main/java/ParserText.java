@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.jsoup.Jsoup;
@@ -13,6 +14,17 @@ public class ParserText {
     String textContent;
     String namePost;
     String fileName;
+
+    private StringBuilder HtmlImg = new StringBuilder();
+
+    public StringBuilder getHtmlImg() {
+        return HtmlImg;
+    }
+
+    public void setHtmlImg(StringBuilder htmlImg) {
+        HtmlImg = htmlImg;
+    }
+    /*private ArrayList<String> ftpPathUrl;*/
 
     public ParserText(String urlParsing) {
         this.urlParsing = urlParsing;
@@ -79,4 +91,5 @@ public class ParserText {
             fileName = sb.toString().trim()+date;
         }
     }
+
 }
