@@ -9,6 +9,8 @@ public class FileManager {
     FTPLoader ftp;
     boolean ftpon = false;
 
+    private ArrayList<String> pathFTP = new ArrayList<>();
+
     public boolean isNoImage() {
         return noImage;
     }
@@ -52,7 +54,7 @@ public class FileManager {
         File newDirectory = new File(file.getAbsolutePath()+"\\"+pt.fileName);
         System.out.println(newDirectory);
         System.out.println("попытка создать директорию фото = "+newDirectory.mkdirs());
-        recText(new File(newDirectory.getAbsolutePath()+"\\"+pt.fileName+".txt"));
+
         for(String s : pi.getUrlImage()){
             recImage(newDirectory.getAbsoluteFile(),s);
         }
@@ -60,6 +62,9 @@ public class FileManager {
             recImage(newDirectory.getAbsoluteFile(),"https://mygemorr.ru/noImage200.png");
             noImage = true;
         }
+
+        recText(new File(newDirectory.getAbsolutePath()+"\\"+pt.fileName+".txt"));
+
     }
     public void recText(File file){
         try {
@@ -67,6 +72,19 @@ public class FileManager {
             fw.write(pt.getTextContent());
             fw.write(System.lineSeparator());
             fw.write(System.lineSeparator());
+            if (!isFtpon()) {
+                for (String imageUrl:pi.getUrlImage()) {
+                    fw.write("<p><img src=\""+imageUrl+"\" /></p>");
+                    fw.write(System.lineSeparator());
+                    pt.getHtmlImg().append("<p><img src=\\\"").append(imageUrl).append("\\\" /></p>").append("\\n");
+                }
+            }else {
+                for (String ftpUrl:pathFTP){
+                    fw.write("<p><img src=\""+ftpUrl+"\" /></p>");
+                    fw.write(System.lineSeparator());
+                    pt.getHtmlImg().append("<p><img src=\\\"").append(ftpUrl).append("\\\" /></p>").append("\\n");
+                }
+            }
             fw.write(pt.namePost);
             fw.close();
         } catch (IOException e) {
@@ -101,6 +119,7 @@ public class FileManager {
                 outputStream.write(buffer, 0, length);
             }
             if(ftpon){
+                ftpUrlGenerator(new File(fileName));
                 ftp.ftpConn(new File(fileName));
             }
 
@@ -110,6 +129,11 @@ public class FileManager {
         } catch(Exception e) {
             System.out.println("Exception: " + e.getMessage());
         }
+    }
+    private void ftpUrlGenerator(File ftpPath){
+        String fs = ftp.getFtpPath()+ FTPLoader.Translator.translitor(pt.getFileName());
+        String newFs = fs +"/"+ FTPLoader.Translator.translitor(ftpPath.getName());
+        pathFTP.add(newFs.replace("/www/","http://"));
     }
 
 }
