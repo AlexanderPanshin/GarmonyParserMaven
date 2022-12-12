@@ -43,7 +43,9 @@ public class Parser {
         // Тепреь можно любой урл
         String newUrl = urlCorector(sc.nextLine());
         while (newUrl!="exit") {
+
             pt1 = new ParserText(newUrl);
+
             ParserImage pi = new ParserImage(pt1.getUrlParsing());
             System.out.println("Имя записи :" + pt1.getNamePost());
             System.out.println("Имя файла :" + pt1.getFileName());
