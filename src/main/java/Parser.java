@@ -1,3 +1,7 @@
+import gui.DialogFTP;
+import gui.DialogJoom;
+import gui.DialogVk;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -16,34 +20,25 @@ public class Parser {
 
     private static boolean joomlaOn = false;
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Включить модуль FTP? да/нет :");
-        if(sc.nextLine().equals("да")){
-            System.out.println("Модуль Ftp включен введите адрес хоста : ");
-            hostAddress = sc.nextLine();
-            System.out.println("Введите логин : ");
-            log = sc.nextLine();
-            System.out.println("Введите пароль : ");
-            password = sc.nextLine();
-            System.out.println("Путь до папки на ftp сервере : ");
-            ftpPath = sc.nextLine();
+        DialogFTP d = new DialogFTP();
+        if(d.otvetReturn().equals("да")){
+            hostAddress = d.hostFTPReturn();
+            log = d.loginFTPReturn();
+            password = d.passFTPReturn();
+            ftpPath = d.pathFTPReturn();
             ftpOn = true;
         }
-        System.out.println("Включить модуль дабавление новости Joomla? да/нет (Joomla V4)");
-        if(sc.nextLine().equals("да")){
+        DialogJoom j = new DialogJoom();
+        if(j.otvetJ4().equals("да")){
             joomlaOn = true;
-            System.out.println("ВВедите Токен API :");
-            keyJoomla = sc.nextLine();
-            System.out.println("Введите адрес сайта :");
-            siteJoomla = sc.nextLine();
+            keyJoomla = j.tokenJoomla();
+            siteJoomla = j.urlJoomla();
 
         }
-
-        System.out.println("Введите адрес записи в вк :");
-        // Тепреь можно любой урл
-        String newUrl = urlCorector(sc.nextLine());
-        while (newUrl!="exit") {
-
+        DialogVk v = new DialogVk();
+        String newUrl;
+        while ((newUrl = v.urlVk())!=null) {
+            newUrl = urlCorector(newUrl);
             pt1 = new ParserText(newUrl);
 
             ParserImage pi = new ParserImage(pt1.getUrlParsing());
@@ -53,7 +48,7 @@ public class Parser {
             if(ftpOn){
                 ftp = new FTPLoader(hostAddress,log,password,pt1,ftpPath);
             }
-            FileManager fl = new FileManager(pt1, new File("D:\\test1\\"), pi,ftp,ftpOn);
+            FileManager fl = new FileManager(pt1, v.chooserVK(), pi,ftp,ftpOn);
 
             CuterImg cuterImg = new CuterImg(fl);
 
@@ -61,9 +56,6 @@ public class Parser {
                 RePostreJ4 postreJ4 = new RePostreJ4(keyJoomla,2,"Parser meta discription","Raz,Dva",pt1);
                 postreJ4.goPost(siteJoomla);
             }
-
-            newUrl = urlCorector(sc.nextLine());
-
 
         }
 
