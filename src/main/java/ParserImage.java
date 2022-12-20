@@ -26,13 +26,23 @@ public class ParserImage {
             throw new RuntimeException(e);
         }
         Elements title = document.select("img.MediaGrid__imageElement");
-
-        for(Element e:title){
-            String urlParse = e.toString();
-            urlParse = urlParse.split("src=\"")[1];
-            urlParse = urlParse.split("\"")[0];
-            urlParse = coorectUrl(urlParse);
-            urlImage.add(urlParse);
+        if(!title.isEmpty()) {
+            for (Element e : title) {
+                String urlParse = e.toString();
+                urlParse = urlParse.split("src=\"")[1];
+                urlParse = urlParse.split("\"")[0];
+                urlParse = coorectUrl(urlParse);
+                urlImage.add(urlParse);
+            }
+        }else {
+            title = document.select("img.MediaGrid__imageOld");
+            for (Element e : title) {
+                String urlParse = e.toString();
+                urlParse = urlParse.split("src=\"")[1];
+                urlParse = urlParse.split("\"")[0];
+                urlParse = coorectUrl(urlParse);
+                urlImage.add(urlParse);
+            }
         }
     }
     public String coorectUrl (String url){
