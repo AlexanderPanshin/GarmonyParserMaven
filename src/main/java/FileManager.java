@@ -51,7 +51,7 @@ public class FileManager {
         }else {
             System.out.println("Каталог существуе готов для записи. ");
         }
-        File newDirectory = new File(file.getAbsolutePath()+"\\"+pt.fileName);
+        File newDirectory = new File(file.getAbsolutePath()+File.separator+pt.fileName);
         System.out.println(newDirectory);
         System.out.println("попытка создать директорию фото = "+newDirectory.mkdirs());
 
@@ -63,7 +63,7 @@ public class FileManager {
             noImage = true;
         }
 
-        recText(new File(newDirectory.getAbsolutePath()+"\\"+pt.fileName+".txt"));
+        recText(new File(newDirectory.getAbsolutePath()+File.separator+pt.fileName+".txt"));
 
     }
     public void recText(File file){
@@ -94,7 +94,7 @@ public class FileManager {
     }
     public void recImage(File file,String url){
         try{
-            String fileName = file.getAbsolutePath()+"\\"+pt.getFileName()+"img"+conterImg+".jpg";
+            String fileName = file.getAbsolutePath()+File.separator+pt.getFileName()+"img"+conterImg+".jpg";
             conterImg++;
             String website;
             if(!url.contains("https")) {
