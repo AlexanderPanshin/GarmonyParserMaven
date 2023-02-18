@@ -10,6 +10,7 @@ public class DialogVk {
     }
     public File chooserVK(){
         JFileChooser file = new JFileChooser();
+        file.setDialogTitle("Сохранить в ...");
         file.setMultiSelectionEnabled(false);
         file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         file.setFileHidingEnabled(false);
@@ -18,5 +19,8 @@ public class DialogVk {
             return f;
         }
         else return null;
+    }
+    public void finish(String stroka){
+        JOptionPane.showMessageDialog(null,"Ваши данные сохранены тут  :"+System.lineSeparator() + stroka);
     }
 }

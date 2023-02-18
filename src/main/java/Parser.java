@@ -1,9 +1,5 @@
-import gui.DialogFTP;
-import gui.DialogJoom;
-import gui.DialogVk;
+import gui.*;
 
-import java.io.File;
-import java.util.Scanner;
 
 public class Parser {
 
@@ -28,13 +24,7 @@ public class Parser {
             ftpPath = d.pathFTPReturn();
             ftpOn = true;
         }
-        DialogJoom j = new DialogJoom();
-        if(j.otvetJ4().equals("да")){
-            joomlaOn = true;
-            keyJoomla = j.tokenJoomla();
-            siteJoomla = j.urlJoomla();
 
-        }
         DialogVk v = new DialogVk();
         String newUrl;
         while ((newUrl = v.urlVk())!=null) {
@@ -52,11 +42,18 @@ public class Parser {
 
             CuterImg cuterImg = new CuterImg(fl);
 
-            if (joomlaOn){
-                RePostreJ4 postreJ4 = new RePostreJ4(keyJoomla,2,"Parser meta discription","Raz,Dva",pt1);
-                postreJ4.goPost(siteJoomla);
-            }
+            DialogJoom j = new DialogJoom();
+            if(j.otvetJ4().equals("да")){
+                joomlaOn = true;
+                keyJoomla = j.tokenJoomla();
+                siteJoomla = j.urlJoomla();
 
+            }
+            if (joomlaOn){
+                RePostreJ4 postreJ4 = new RePostreJ4(keyJoomla,siteJoomla,"Parser meta discription","Raz,Dva",pt1);
+                postreJ4.goPost();
+            }
+            v.finish(fl.fpath.getAbsolutePath());
         }
 
 

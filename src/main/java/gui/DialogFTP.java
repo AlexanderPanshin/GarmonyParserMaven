@@ -26,11 +26,11 @@ public class DialogFTP{
     }
 
     public String passFTPReturn(){
-        String otvet = JOptionPane.showInputDialog(null,"Введите логин FTP хоста","Garmony Parser",1);
+        String otvet = JOptionPane.showInputDialog(null,"Введите пароль FTP хоста","Garmony Parser",1);
         return otvet;
     }
     public String pathFTPReturn(){
-        String otvet = JOptionPane.showInputDialog(null,"Введите логин FTP хоста","Garmony Parser",1);
+        String otvet = JOptionPane.showInputDialog(null,"Введите путь FTP хоста","Garmony Parser",1);
         return otvet;
     }
 }

@@ -51,7 +51,7 @@ public class FileManager {
         }else {
             System.out.println("Каталог существуе готов для записи. ");
         }
-        File newDirectory = new File(file.getAbsolutePath()+File.separator+pt.fileName);
+        File newDirectory = new File(file.getAbsolutePath()+File.separator+pt.fileName+ftp.getRand());//tyt
         System.out.println(newDirectory);
         System.out.println("попытка создать директорию фото = "+newDirectory.mkdirs());
 
@@ -131,7 +131,7 @@ public class FileManager {
         }
     }
     private void ftpUrlGenerator(File ftpPath){
-        String fs = ftp.getFtpPath()+ FTPLoader.Translator.translitor(pt.getFileName());
+        String fs = ftp.getFtpPath()+ FTPLoader.Translator.translitor(pt.getFileName())+ftp.getRand();
         String newFs = fs +"/"+ FTPLoader.Translator.translitor(ftpPath.getName());
         pathFTP.add(newFs.replace("/www/","http://"));
     }

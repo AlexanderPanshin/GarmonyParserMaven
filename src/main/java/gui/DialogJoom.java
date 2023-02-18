@@ -20,5 +20,6 @@ public class DialogJoom {
         String otvet = JOptionPane.showInputDialog(null,"Введите адрес сайта","Garmony Parser",1);
         return otvet;
     }
+
 }
 

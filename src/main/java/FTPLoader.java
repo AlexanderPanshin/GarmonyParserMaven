@@ -13,9 +13,14 @@ public class FTPLoader {
     private String log;
     private String password;
     private ParserText pt;
+    private String rand;
 
     public String getFtpPath() {
         return ftpPath;
+    }
+
+    public String getRand() {
+        return rand;
     }
 
     private String ftpPath;
@@ -25,12 +30,13 @@ public class FTPLoader {
         this.password = password;
         this.pt = pt;
         this.ftpPath = ftpPath;
+        rand = String.valueOf((int)(Math.random()*100));
     }
 
     public void ftpConn(File filePath) throws IOException {
         FTPClient fClient = new FTPClient();
         FileInputStream fInput = new FileInputStream(filePath);
-        String fs = ftpPath+Translator.translitor(pt.getFileName());
+        String fs = ftpPath+Translator.translitor(pt.getFileName())+rand;
         /*
         хм имеем проблема что на ftp сервере не создаються кирилические имена
         транслитилирвать для этого создам отдельный статичный класс со стачиным методом да бы не создавать
