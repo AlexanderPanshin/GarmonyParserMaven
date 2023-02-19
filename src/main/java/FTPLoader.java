@@ -152,6 +152,14 @@ public class FTPLoader {
                     case 'я':
                         charMass[i]='y';
                         break;
+                    case '#':
+                    case ' ':
+                    case '!':
+                    case '%':
+                    case '.':
+                    case ',':
+                        charMass[i]='1';
+                        break;
                 }
             }
             return String.valueOf(charMass);
